@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="AutoBean"/>
+    <bean id="database" class="Database">
+        <property name="name" value="TOMCAT"/>
+        <property name="port" value="32"/>
+    </bean>
+
+
+    <!--for restaurant-->
+    <bean id="hotDrink"  class="restaurant.Tea"  primary="true">
+        <property name="price" value="12">
+
+        </property>
+    </bean>
+
+    <bean id="hotDrinkQualifier"  class="restaurant.Tea" >
+        <property name="price" value="123">
+
+        </property>
+    </bean>
+    <bean id="hotDrinkQualifierMethod"  class="restaurant.Tea" >
+        <property name="price" value="12345">
+
+        </property>
+    </bean>
+    <bean id="hotDrinkQualifierConstructor"  class="restaurant.Tea" >
+        <property name="price" value="1234">
+
+        </property>
+    </bean>
+    <bean id="expressTea" class="restaurant.ExpressTea">
+        <property name="price" value="36">
+
+        </property>
+    </bean>
+    <bean id="teaRestaurant" class="restaurant.Restaurant"  primary="true" scope="prototype">
+        <property name="hotDrink" ref="hotDrink">
+
+        </property>
+    </bean>
+
+
+    <bean id="restaurantName" class="restaurant.Restaurant" autowire="byName">
+
+    </bean>
+
+    <bean id="restaurantType" class="restaurant.Restaurant" autowire="byType">
+
+    </bean>
+
+    <bean id="restaurantQuali" class="restaurant.Restaurant">
+
+    </bean>
+    <!--<bean id="restaurant" class="restaurant.Restaurant" autowire="byType">-->
+
+    <!--</bean>-->
+    <!--InnnerBean-->
+    <bean id="expressTeaRestaurant" class="restaurant.Restaurant">
+        <property name="hotDrink">
+            <bean class="restaurant.ExpressTea">
+                <property name="price" value="36">
+                </property>
+            </bean>
+        </property>
+
+    </bean>
+
+    <!--//Commented beacuase of required-->
+    <!--<bean id="teaConstructor" class="restaurant.Restaurant" autowire="constructor" >-->
+
+
+    <!--</bean>-->
+    <bean id="teaConstructor" class="restaurant.Restaurant" autowire="constructor" >
+
+
+    </bean>
+
+    <bean id="resQualifier" class="restaurant.Restaurant"  >
+
+
+    </bean>
+
+
+    <!--Complex Class-->
+    <bean id="complex" class="Complex">
+        <property name="list">
+            <list>
+                <value>Value in List 1</value>
+                <value>Value in List 2</value>
+            </list>
+
+        </property>
+        <property name="map">
+            <map>
+                <entry key="1" value="One"/>
+                <entry key="2" value="Two"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>1</value>
+                <value>2</value>
+                <value>1</value>
+            </set>
+        </property>
+    </bean>
+    <context:annotation-config/>
+</beans>
